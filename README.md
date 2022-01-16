@@ -58,3 +58,12 @@ fvm use 2.8.1
     "dart.flutterSdkPath": ".fvm/flutter_sdk"
 }
 ```
+
+## library
+
+1. intl
+
+```shell script
+# 파일 생성
+fvm flutter gen-l10n
+```

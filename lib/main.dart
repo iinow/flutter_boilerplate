@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// import 'package:flutter_webrtc/flutter_webrtc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,8 +13,25 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var localizationsDelegates = [
+      // GlobalMaterialLocalizations.delegate,
+      // GlobalWidgetsLocalizations.delegate,
+      // GlobalCupertinoLocalizations.delegate,
+    ];
+
+    var supportedLocales = [
+      // const Locale('ko', 'KR'),
+      // const Locale('en', 'EN'),
+    ];
+
+    var str = 'hello world';
+    // var deviceData = MediaQuery.of(context);
+    // deviceData.size
+
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Localizations Sample App',
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -24,7 +44,9 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(
+        title: 'Flutter Demo Home Page',
+      ),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -50,6 +72,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  // final _localRenderer = RTCVideoRenderer();
 
   void _incrementCounter() {
     setState(() {
@@ -64,6 +87,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    const mediaConstraints = {
+      'audio': true,
+      'video': {'facingMode': 'user'},
+    };
+    // _localRenderer.initialize().then((value) => {print('성공')},
+    //     onError: (error) => {print('error: $error')});
+
+    // Helper.openCamera(mediaConstraints)
+    //     .then((value) => _localRenderer.srcObject = value);
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -103,6 +136,8 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            Text(AppLocalizations.of(context)!.helloWorld),
+            // RTCVideoView(_localRenderer)
           ],
         ),
       ),
