@@ -3,8 +3,9 @@
 ## Getting Started
 
 ### install
+
 * flutter
-  * 압축푼 디렉토리에 `git init`
+    * 압축푼 디렉토리에 `git init`
 * dart
 * fvm
 
@@ -21,7 +22,7 @@ brew install dart
 
 ```
 
-## flutter 
+## flutter
 
 ```shell script
 fvm flutter create {project name}
@@ -32,6 +33,7 @@ fvm flutter create {project name}
 * https://fvm.app/docs/getting_started/installation
 
 ### 명령어
+
 ```shell script
 # fvm 명령어
 fvm releases
@@ -53,9 +55,10 @@ fvm use 2.8.1
 
 1. shift + command + P
 2. workspace setting
+
 ```json
 {
-    "dart.flutterSdkPath": ".fvm/flutter_sdk"
+  "dart.flutterSdkPath": ".fvm/flutter_sdk"
 }
 ```
 
@@ -66,4 +69,14 @@ fvm use 2.8.1
 ```shell script
 # 파일 생성
 fvm flutter gen-l10n
+```
+
+## Environment variables
+
+* 아래 `profile` 값을 읽어서 `.env.local`, `.env.dev`, `.env.prod` 파일을 읽도록
+* `flutter_dotenv` 라이브러리와 함께
+
+```shell
+flutter run --dart-define=PROFILE=dev
+const profile = String.fromEnvironment('PROFILE');
 ```
