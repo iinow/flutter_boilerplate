@@ -93,6 +93,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  late RTCDataChannel localDataChannel;
+  late RTCDataChannel remoteDataChannel;
 
   // final _localRenderer = RTCVideoRenderer();
   // final re = RTCPeerConnection()
@@ -126,6 +128,18 @@ class _MyHomePageState extends State<MyHomePage> {
               // onPressed: () => Get.toNamed('/chat'),
               onPressed: () => Navigator.pushNamed(context, '/chat'),
               child: const Text('채팅으로 바로가기'),
+            ),
+            TextButton(
+              onPressed: () {
+                remoteDataChannel.send(RTCDataChannelMessage('로컬에 메시지 받아라!'));
+              },
+              child: const Text('로컬 -> 원격 메시지 전달'),
+            ),
+            TextButton(
+              onPressed: () {
+                localDataChannel.send(RTCDataChannelMessage('원격에 메시지 받아라!'));
+              },
+              child: const Text('원격 -> 로컬 메시지 전달'),
             ),
             // Text(AppLocalizations.of(context)!.helloWorld),
             // RTCVideoView(_localRenderer),
@@ -161,18 +175,16 @@ class _MyHomePageState extends State<MyHomePage> {
       ]
     });
 
-    RTCDataChannel localDataChannel =
+    localDataChannel =
         await local.createDataChannel('sendChannel', RTCDataChannelInit());
     localDataChannel.onMessage =
-        (message) => {log('local text: ${message.text}')};
-    RTCDataChannel remoteDataChannel;
+        (message) => log('local text: ${message.text}');
 
     remote.onDataChannel = (RTCDataChannel channel) => {
           log('채널 와ㅣㅆ당 '),
           remoteDataChannel = channel,
           remoteDataChannel.onMessage =
-              (message) => {log('remote text: ${message.text}')},
-          remoteDataChannel.send(RTCDataChannelMessage('연결 되었덩'))
+              (message) => log('remote text: ${message.text}')
         };
 
     local.onIceCandidate = (RTCIceCandidate candidate) async => {
@@ -191,7 +203,5 @@ class _MyHomePageState extends State<MyHomePage> {
     var answer = await remote.createAnswer();
     await remote.setLocalDescription(answer);
     await local.setRemoteDescription(answer);
-
-    await localDataChannel.send(RTCDataChannelMessage('Hello world?'));
   }
 }
