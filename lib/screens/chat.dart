@@ -23,30 +23,32 @@ class _ChatState extends State<Chat> {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
         color: Colors.white,
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _nicknameController,
-                  // obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Nickname',
+        child: Column(
+          children: [
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _nicknameController,
+                    // obscureText: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Nickname',
+                    ),
                   ),
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                  log('연결 클릭');
-                },
-                child: const Text('연결'),
-              ),
-            ],
-          ),
+                TextButton(
+                  onPressed: () {
+                    log('연결 클릭');
+                  },
+                  child: const Text('연결'),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

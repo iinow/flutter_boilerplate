@@ -10,6 +10,7 @@ import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 import 'common/utils/websocket.dart';
@@ -104,22 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    const mediaConstraints = {
-      'audio': true,
-      'video': {'facingMode': 'user'},
-    };
-
-    // var socket = io(
-    //   'http://192.168.0.5:8080/maps',
-    //   OptionBuilder().setTransports(['websocket']).build(),
-    // );
-    // socket.onConnect((_) => log('연결 성공'));
-    // socket.onConnectError((data) => log(data));
-    // socket.onError((data) => log(data));
-    log('dkdkdkd');
-
-    // final socket = SimpleWebSocket('http://192.168.0.5:8080/maps');
-    // socket.connect();
+    connect();
 
     return Scaffold(
       appBar: AppBar(
@@ -152,5 +138,60 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  connect() async {
+    var socket = io(
+      'http://192.168.0.5:8080/maps',
+      OptionBuilder().setTransports(['websocket']).build(),
+    );
+    socket.onConnect((_) => log('연결 성공'));
+    // socket.onConnectError((data) => log(data));
+    // socket.onError((data) => log(data));
+
+    var local = await createPeerConnection({
+      'iceServers': [
+        {'urls': 'stun:stun.l.google.com:19302'}
+      ]
+    });
+
+    var remote = await createPeerConnection({
+      'iceServers': [
+        {'urls': 'stun:stun.l.google.com:19302'}
+      ]
+    });
+
+    RTCDataChannel localDataChannel =
+        await local.createDataChannel('sendChannel', RTCDataChannelInit());
+    localDataChannel.onMessage =
+        (message) => {log('local text: ${message.text}')};
+    RTCDataChannel remoteDataChannel;
+
+    remote.onDataChannel = (RTCDataChannel channel) => {
+          log('채널 와ㅣㅆ당 '),
+          remoteDataChannel = channel,
+          remoteDataChannel.onMessage =
+              (message) => {log('remote text: ${message.text}')},
+          remoteDataChannel.send(RTCDataChannelMessage('연결 되었덩'))
+        };
+
+    local.onIceCandidate = (RTCIceCandidate candidate) async => {
+          log('local: iceCandidate: ${candidate.candidate}'),
+          await remote.addCandidate(candidate)
+        };
+    remote.onIceCandidate = (RTCIceCandidate candidate) async => {
+          log('remote: iceCandidate: ${candidate.candidate}'),
+          await local.addCandidate(candidate)
+        };
+
+    var offer = await local.createOffer();
+    await local.setLocalDescription(offer);
+    await remote.setRemoteDescription(offer);
+
+    var answer = await remote.createAnswer();
+    await remote.setLocalDescription(answer);
+    await local.setRemoteDescription(answer);
+
+    await localDataChannel.send(RTCDataChannelMessage('Hello world?'));
   }
 }
