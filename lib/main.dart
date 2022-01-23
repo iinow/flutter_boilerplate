@@ -3,9 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_example/common/constants.dart';
+import 'package:flutter_example/screens/chat.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:flutter_webrtc/flutter_webrtc.dart';
+import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:socket_io_client/socket_io_client.dart';
@@ -66,10 +68,15 @@ class MyApp extends StatelessWidget {
         // textTheme: GoogleFonts.emilysCanndyTextTheme()
       ),
       darkTheme: ThemeData.dark(),
-      home: const MyHomePage(
-        title: 'Flutter Demo Home Page',
-      ),
+      // home: const MyHomePage(
+      //   title: 'Flutter Demo Home Page',
+      // ),
       debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const MyHomePage(title: 'My Home Page'),
+        '/chat': (context) => const Chat(),
+      },
     );
   }
 }
@@ -102,13 +109,13 @@ class _MyHomePageState extends State<MyHomePage> {
       'video': {'facingMode': 'user'},
     };
 
-    var socket = io(
-      'http://192.168.0.5:8080/maps',
-      OptionBuilder().setTransports(['websocket']).build(),
-    );
-    socket.onConnect((_) => log('연결 성공'));
-    socket.onConnectError((data) => log(data));
-    socket.onError((data) => log(data));
+    // var socket = io(
+    //   'http://192.168.0.5:8080/maps',
+    //   OptionBuilder().setTransports(['websocket']).build(),
+    // );
+    // socket.onConnect((_) => log('연결 성공'));
+    // socket.onConnectError((data) => log(data));
+    // socket.onError((data) => log(data));
     log('dkdkdkd');
 
     // final socket = SimpleWebSocket('http://192.168.0.5:8080/maps');
@@ -128,6 +135,11 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
+            ),
+            TextButton(
+              // onPressed: () => Get.toNamed('/chat'),
+              onPressed: () => Navigator.pushNamed(context, '/chat'),
+              child: const Text('채팅으로 바로가기'),
             ),
             // Text(AppLocalizations.of(context)!.helloWorld),
             // RTCVideoView(_localRenderer),

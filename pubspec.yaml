@@ -43,6 +43,7 @@ dev_dependencies:
   #New Dev Dependencies
   injectable_generator:
   build_runner:
+  faker: 2.0.0
 
 flutter:
   generate: true
