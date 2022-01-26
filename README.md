@@ -80,3 +80,8 @@ fvm flutter gen-l10n
 flutter run --dart-define=PROFILE=dev
 const profile = String.fromEnvironment('PROFILE');
 ```
+
+## Remote debug
+
+* ./adb tcpip 5555
+* ./adb connect 192.168.0.18
