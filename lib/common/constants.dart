@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 class Constants {
   static const profile = 'PROFILE';
 
