@@ -1,3 +1,4 @@
 {
-    "helloWorld": "안녕?22"
+  "helloWorld": "안녕?22",
+  "defaultTitle": "예제 앱!"
 }

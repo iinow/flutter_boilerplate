@@ -1,5 +1,7 @@
 # flutter_example
 
+* https://stackoverflow.com/questions/946993/intellij-reformat-on-file-save
+
 ## Getting Started
 
 ### install
@@ -64,7 +66,7 @@ fvm use 2.8.1
 
 ## library
 
-1. intl
+1. intl 다국어
 
 ```shell script
 # 파일 생성
