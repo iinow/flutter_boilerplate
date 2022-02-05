@@ -5,5 +5,3 @@ class Constants {
 
   static get title => 'Sample App';
 }
-
-enum Profile { local, dev, prod }

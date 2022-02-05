@@ -85,5 +85,15 @@ const profile = String.fromEnvironment('PROFILE');
 
 ## Remote debug
 
-* ./adb tcpip 5555
-* ./adb connect 192.168.0.18
+* ~/Library/Android/sdk/platform-tools/adb tcpip 5555
+    * 5555 -> 포트 번호
+* ~/Library/Android/sdk/platform-tools/adb connect 192.168.0.18
+    * 192.168.0.18 -> 모바일 내부 할당 아이피
+
+## injectable
+
+* 아래 명령어를 실행하면 `lib/common/config/injectable.config.dart` 파일이 생성된다
+
+```shell
+fvm flutter packages pub run build_runner build 
+```
