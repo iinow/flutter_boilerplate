@@ -6,6 +6,7 @@ import 'package:flutter_example/common/config/config.dart';
 import 'package:flutter_example/service/i_room_service.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -37,6 +38,12 @@ class Home extends StatelessWidget {
                 dev.log('rooms: ${jsonEncode(rooms)}');
               },
             ),
+            CupertinoButton(
+              child: const Text('지도 바로가기'),
+              onPressed: () {
+                Get.toNamed('/maps');
+              },
+            )
           ],
         ),
       ),

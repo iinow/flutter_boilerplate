@@ -35,6 +35,11 @@
     <!--    <service-->
     <!--      android:name="com.example.flutter_example.common.utils.get_display_media_sample"-->
     <!--      android:foregroundServiceType="mediaProjection"/>-->
+
+    <!--  google map  -->
+    <meta-data
+      android:name="com.google.android.geo.API_KEY"
+      android:value="AIzaSyCHMc06O-uxeSDhtH2a9SRCjxcoXqoSOos"/>
   </application>
   <uses-permission android:name="android.permission.INTERNET"/>
 

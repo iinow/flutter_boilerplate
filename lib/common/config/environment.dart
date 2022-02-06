@@ -28,7 +28,7 @@ abstract class Profile {
   static const dev = 'dev';
   static const prod = 'prod';
 
-  static const defaultProfile = mock;
+  static const defaultProfile = local;
 }
 
 configureDotEnv() async {
