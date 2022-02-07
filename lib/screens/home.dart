@@ -43,7 +43,13 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Get.toNamed('/maps');
               },
-            )
+            ),
+            CupertinoButton(
+              child: const Text('제스쳐'),
+              onPressed: () {
+                Get.toNamed('/swipe');
+              },
+            ),
           ],
         ),
       ),

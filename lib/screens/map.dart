@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer' as dev;
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:geolocator/geolocator.dart';
@@ -43,6 +44,18 @@ class MapSampleState extends State<MapSample> {
   @override
   void initState() {
     super.initState();
+    GestureDetector(
+      onPanUpdate: (details) {
+        if (details.delta.dx > 0) {
+          print('swiping in right direction');
+        }
+
+        if (details.delta.dx < 0) {
+          print('swiping in left direction');
+        }
+      },
+      child: Text('heool'),
+    );
   }
 
   @override
