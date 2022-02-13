@@ -1,0 +1,4 @@
+enum OAuthProviderType {
+  kakao,
+  apple,
+}

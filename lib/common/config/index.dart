@@ -1,11 +1,14 @@
+import 'package:flutter_example/common/config/oauth_provider.dart';
+
 import 'config.dart';
 import 'environment.dart';
 import 'injectable.dart';
 import 'system.dart';
 
-process() {
+process() async {
   var getIt = configureGet();
   configureDependencies(getIt);
-  configureDotEnv();
+  await configureDotEnv();
   configureSystemUi();
+  configureOAuth(getIt);
 }

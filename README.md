@@ -95,5 +95,6 @@ const profile = String.fromEnvironment('PROFILE');
 * 아래 명령어를 실행하면 `lib/common/config/injectable.config.dart` 파일이 생성된다
 
 ```shell
-fvm flutter packages pub run build_runner build 
+fvm flutter packages pub run build_runner build
+fvm flutter packages pub run build_runner watch 
 ```

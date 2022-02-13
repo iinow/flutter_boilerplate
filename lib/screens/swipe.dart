@@ -1,6 +1,13 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_example/common/config/config.dart';
+import 'package:flutter_example/common/config/oauth/kakao_oauth_provider.dart';
+import 'package:flutter_example/common/config/oauth_provider.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
+import 'package:kakao_flutter_sdk/all.dart';
 
 class Swipe extends StatelessWidget {
   const Swipe({Key? key}) : super(key: key);
@@ -28,8 +35,15 @@ class Swipe extends StatelessWidget {
         child: Container(
           width: MediaQuery.of(context).size.width,
           color: CupertinoColors.destructiveRed,
-          child: const Center(
-            child: Text('hell'),
+          child: CupertinoButton(
+            onPressed: () {
+              var kakaoProvider =
+                  GetIt.I.get<OAuthProvider>(instanceName: 'kakao');
+              kakaoProvider.login();
+            },
+            child: const Center(
+              child: Text('hell'),
+            ),
           ),
         ),
       ),
