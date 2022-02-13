@@ -50,6 +50,12 @@ class Home extends StatelessWidget {
                 Get.toNamed('/swipe');
               },
             ),
+            CupertinoButton(
+              child: const Text('provider 예제'),
+              onPressed: () {
+                Get.toNamed('/provider');
+              },
+            ),
           ],
         ),
       ),
