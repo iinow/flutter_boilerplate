@@ -98,3 +98,18 @@ const profile = String.fromEnvironment('PROFILE');
 fvm flutter packages pub run build_runner build
 fvm flutter packages pub run build_runner watch 
 ```
+
+### Logical Pixel -> LP
+
+* 논리 픽셀에서 물리적 픽셀 비율: `MediaQuery.of(context).devicePixelRatio`
+
+| Density | dots per inch | dots per cm | Flutter Image Folder |
+| --- | --- | --- | --- |
+| ldpi | 120 |  | 0.75x |
+| mdpi | 160 |  | 1.0x |
+| hdpi | 240 |  | 1.5x |
+| xhdpi | 320 |  | 2.0x |
+| xxhdpi | 480 |  | 3.0x |
+| xxxhdpi | 640 | 251.9 | 4.0x |
+
+
