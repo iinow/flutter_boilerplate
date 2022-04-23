@@ -9,6 +9,7 @@ import 'package:flutter_example/route/router.dart' as router;
 import 'package:get/get.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:kakao_flutter_sdk/common.dart';
 
 import 'common/config/environment.dart';
 

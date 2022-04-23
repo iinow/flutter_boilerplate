@@ -112,4 +112,12 @@ fvm flutter packages pub run build_runner watch
 | xxhdpi | 480 |  | 3.0x |
 | xxxhdpi | 640 | 251.9 | 4.0x |
 
+### json serialize
+
+* [How to use](https://pub.dev/packages/json_serializable)
+
+```shell
+fvm flutter pub run build_runner build
+```
+
 
